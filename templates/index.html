@@ -1,14 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Fake News Detection Portal</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fake News Detector</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
 
-    <h1>Fake News Detection Portal</h1>
+    <div class="container">
 
-    <p>Welcome to the Fake News Detection Portal.</p>
+        <div class="card">
+
+            <h1>Fake News Detector</h1>
+
+            <p class="subtitle">
+                Machine Learning Based News Classification Portal
+            </p>
+
+
+            <form action="/predict"
+                  method="POST">
+
+                <label for="news_text">
+                    Enter News Article or Headline
+                </label>
+
+                <textarea
+                    id="news_text"
+                    name="news_text"
+                    placeholder="Paste your news article or headline here..."
+                    required></textarea>
+
+
+                <button type="submit">
+                    Check News
+                </button>
+
+            </form>
+
+
+            {% if prediction %}
+
+            <div class="result">
+
+                <h2>Prediction</h2>
+
+                <div class="prediction">
+                    {{ prediction }}
+                </div>
+
+                {% if confidence %}
+
+                <p>
+                    Confidence:
+                    <strong>
+                        {{ confidence }}%
+                    </strong>
+                </p>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="information">
+
+                <h3>About the System</h3>
+
+                <p>
+                    This application uses Natural Language Processing,
+                    TF-IDF feature extraction and Logistic Regression
+                    to classify news text based on patterns learned
+                    from a labeled dataset.
+                </p>
+
+                <p>
+                    This is an educational classification system and
+                    should not be treated as definitive fact verification.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>
